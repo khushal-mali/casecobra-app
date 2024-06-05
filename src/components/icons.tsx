@@ -7,7 +7,7 @@ export const Icons = {
         stroke="currentColor"
         strokeWidth="7"
         fill="none"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
