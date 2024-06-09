@@ -35,7 +35,7 @@ const Page = () => {
     toast({
       title: `${file.file.type} type is not supported.`,
       description: "Please choose a PNG, JPG or JPEG image instead.",
-      varient: "destructive",
+      variant: "destructive",
     });
   };
 
