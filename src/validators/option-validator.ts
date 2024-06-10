@@ -27,7 +27,7 @@ export const MATERIALS = {
   options: [
     {
       label: "Silicon",
-      value: "silicone",
+      value: "silicon",
       description: undefined,
       price: PRODUCT_PRICES.material.silicon,
     },
