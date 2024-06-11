@@ -1,5 +1,4 @@
-import { color } from "framer-motion";
-("use server");
+"use server";
 
 import { db } from "@/db";
 import {
