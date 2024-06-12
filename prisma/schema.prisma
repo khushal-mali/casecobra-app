@@ -63,10 +63,10 @@ model Order {
   id              String        @id @default(cuid())
   configurationId String
   configuration   Configuration @relation(fields: [configurationId], references: [id])
-  userId          String
   user            User          @relation(fields: [userId], references: [id])
+  userId          String
   amount          Float
-  isPaid          Boolean
+  isPaid          Boolean       @default(false)
   status          OrderStatus   @default(awaiting_shipment)
 
   shippingAddress   ShippingAddress? @relation(fields: [shippingAddressId], references: [id])
