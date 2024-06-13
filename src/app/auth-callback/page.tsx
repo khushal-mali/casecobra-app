@@ -1,6 +1,7 @@
 "use client";
+
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAuthStatus } from "./actions";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
@@ -11,7 +12,6 @@ const Page = () => {
 
   useEffect(() => {
     const configurationId = localStorage.getItem("configurationId");
-
     if (configurationId) setConfigId(configurationId);
   }, []);
 
@@ -27,7 +27,7 @@ const Page = () => {
       localStorage.removeItem("configurationId");
       router.push(`/configure/preview?id=${configId}`);
     } else {
-      router.push(`/`);
+      router.push("/");
     }
   }
 
