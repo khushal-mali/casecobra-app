@@ -2,44 +2,38 @@
 
 import HandleComponent from "@/components/HandleComponent";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn, formatPrice } from "@/lib/utils";
-import NextImage from "next/image";
-import { Rnd } from "react-rnd";
-import {
-  Radio,
-  RadioGroup,
-  Label as RadioLabel,
-  Description as RadioDescription,
-} from "@headlessui/react";
-import { useRef, useState } from "react";
-import { color } from "framer-motion";
-import {
-  COLORS,
-  FINISHES,
-  MATERIALS,
-  MODELS,
-} from "@/validators/option-validator";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import {
-  ActivitySquare,
-  ArrowRight,
-  Check,
-  ChevronsUpDown,
-} from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useToast } from "@/components/ui/use-toast";
 import { BASE_PRICE } from "@/config/products";
 import { useUploadThing } from "@/lib/uploadthing";
-import { useToast } from "@/components/ui/use-toast";
+import { cn, formatPrice } from "@/lib/utils";
+import {
+  COLORS,
+  FINISHES,
+  MATERIALS,
+  MODELS,
+} from "@/validators/option-validator";
+import {
+  Radio,
+  Description as RadioDescription,
+  RadioGroup,
+  Label as RadioLabel,
+} from "@headlessui/react";
 import { useMutation } from "@tanstack/react-query";
-import { SaveConfigArgs, saveConfig as _saveConfig } from "./actions";
+import { ArrowRight, Check, ChevronsUpDown } from "lucide-react";
+import NextImage from "next/image";
 import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
+import { Rnd } from "react-rnd";
+import { SaveConfigArgs, saveConfig as _saveConfig } from "./actions";
 
 interface DesignConfiguratorProps {
   imageUrl: string;
@@ -55,7 +49,7 @@ const DesignConfigurator = ({
   const { toast } = useToast();
   const router = useRouter();
 
-  const { mutate: saveConfig } = useMutation({
+  const { mutate: saveConfig, isPending } = useMutation({
     mutationKey: ["save-config"],
     mutationFn: async (args: SaveConfigArgs) => {
       await Promise.all([saveConfiguration(), _saveConfig(args)]);
@@ -405,6 +399,9 @@ const DesignConfigurator = ({
                 )}
               </p>
               <Button
+                isLoading={isPending}
+                disabled={isPending}
+                loadingText="Saving"
                 onClick={() =>
                   saveConfig({
                     configId,
@@ -417,7 +414,7 @@ const DesignConfigurator = ({
                 size="sm"
                 className="w-full"
               >
-                Contineu <ArrowRight className="h-4 w-4 ml-1.5 inline" />
+                Continue <ArrowRight className="h-4 w-4 ml-1.5 inline" />
               </Button>
             </div>
           </div>
