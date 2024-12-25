@@ -40,6 +40,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
     mutationKey: ["get-checkout-session"],
     mutationFn: createCheckoutSession,
     onSuccess: ({ url }) => {
+      console.log(user);
       if (url) router.push(url);
       else throw new Error("Unable to retrieve payment URL.");
     },
@@ -53,9 +54,10 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   });
 
   const handleCheckout = () => {
+    console.log(user);
+
     if (user) {
       // create payment session
-      console.log(user);
       createPaymentSession({ configId: id });
     } else {
       // need to log in
