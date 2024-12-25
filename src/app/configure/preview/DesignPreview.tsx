@@ -28,17 +28,12 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
 
   const { color, model, finish, material } = configuration;
 
-  const tw = COLORS.find(
-    (supportedColor) => supportedColor.value === color
-  )?.tw;
+  const tw = COLORS.find((supportedColor) => supportedColor.value === color)?.tw;
 
-  const { label: modelLabel } = MODELS.options.find(
-    ({ value }) => value === model
-  )!;
+  const { label: modelLabel } = MODELS.options.find(({ value }) => value === model)!;
 
   let totalPrice = BASE_PRICE;
-  if (material === "polycarbonate")
-    totalPrice += PRODUCT_PRICES.material.polycarbonate;
+  if (material === "polycarbonate") totalPrice += PRODUCT_PRICES.material.polycarbonate;
   if (finish === "textured") totalPrice += PRODUCT_PRICES.finish.textured;
 
   const { mutate: createPaymentSession, isPending } = useMutation({
@@ -60,6 +55,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   const handleCheckout = () => {
     if (user) {
       // create payment session
+      console.log(user);
       createPaymentSession({ configId: id });
     } else {
       // need to log in
@@ -74,10 +70,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
         aria-hidden="true"
         className="pointer-events-none select-none absolute inset-0 overflow-hidden flex justify-center"
       >
-        <Confetti
-          active={showConfetti}
-          config={{ elementCount: 200, spread: 90 }}
-        />
+        <Confetti active={showConfetti} config={{ elementCount: 200, spread: 90 }} />
       </div>
 
       <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
